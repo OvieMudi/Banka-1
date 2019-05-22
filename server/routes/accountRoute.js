@@ -6,11 +6,8 @@ import accountValidate from '../middlewares/validateAccount';
 
 const accountRouter = new Router();
 const {
-  createAccount,
-  activateDeactivate,
-  deleteAccount,
-  specificAccount,
-  allAccounts,
+  createAccount, changeStatus, deleteAccount,
+  accountTransactionHistory, getAccount, getAllAccounts,
 } = accountController;
 
 accountRouter.post(
@@ -20,22 +17,29 @@ accountRouter.post(
   createAccount,
 );
 
-accountRouter.patch('/:accountNo',
+accountRouter.patch('/:accountnumber',
   requireAuth,
   staffAuth,
   paramsValidate.acctNo,
-  activateDeactivate);
+  accountValidate.changeStatus,
+  changeStatus);
 
-accountRouter.delete('/:accountNo',
+accountRouter.delete('/:accountnumber',
   requireAuth,
   staffAuth,
   paramsValidate.acctNo,
   deleteAccount);
 
-accountRouter.get('/:accountNo',
+accountRouter.get('/:accountnumber/transactions',
+  requireAuth,
+  paramsValidate.acctNo,
+  accountTransactionHistory);
+
+accountRouter.get('/:accountnumber',
   requireAuth, staffAuth,
   paramsValidate.acctNo,
-  specificAccount);
+  getAccount);
 
-accountRouter.get('/', requireAuth, staffAuth, allAccounts);
+accountRouter.get('/', requireAuth, staffAuth, getAllAccounts);
+
 export default accountRouter;

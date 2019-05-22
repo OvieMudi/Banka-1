@@ -1,36 +1,27 @@
 import { Router } from 'express';
 import transactionController from '../controllers/transactionController';
-import { requireAuth, cashierAuth } from '../middlewares/authentication';
+import { requireAuth, staffAuth } from '../middlewares/authentication';
 import paramsValidate from '../middlewares/validateParams';
 import transactionValidate from '../middlewares/validateTransaction';
 
 
 const transactionRouter = new Router();
-const {
-  debitAccount, creditAccount, transactionHistory,
-  specificTransaction,
-} = transactionController;
 
-transactionRouter.post('/:accountNo/debit',
-  requireAuth, cashierAuth,
+
+transactionRouter.post('/:accountnumber/debit',
+  requireAuth, staffAuth,
   paramsValidate.acctNo,
   transactionValidate.amount,
-  debitAccount);
+  transactionController.debit);
 
-transactionRouter.post('/:accountNo/credit',
-  requireAuth, cashierAuth,
+transactionRouter.post('/:accountnumber/credit',
+  requireAuth, staffAuth,
   paramsValidate.acctNo,
-  creditAccount);
+  transactionValidate.amount,
+  transactionController.credit);
 
-transactionRouter.get('/:accountNo/',
+transactionRouter.get('/:id',
   requireAuth,
-  paramsValidate.acctNo,
-  transactionHistory);
-
-transactionRouter.get('/:accountNo/:transactionId',
-  requireAuth,
-  paramsValidate.acctNo,
   paramsValidate.transId,
-  specificTransaction);
-
+  transactionController.getTransaction);
 export default transactionRouter;

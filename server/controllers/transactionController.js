@@ -1,143 +1,117 @@
-import TransactionModel from '../models/transactionModel';
-import data from '../mock/mockData';
+import Transaction from '../models/transactionModel';
+import Account from '../models/accountModel';
 
-const { accounts, transactions } = data;
-
-class Transactions {
-  static async debitAccount(req, res) {
-    const id = transactions.length + 1;
-    const type = 'debit';
-    const { accountNo } = req.params;
-    const { amount } = req.body;
-    const cashier = req.user.id;
-    const account = accounts.filter(acct => acct.accountNumber === Number(accountNo));
-    if (account.length <= 0) {
-      res.status(404).json({
+export default class TransactionController {
+  static async debit(req, res) {
+    const { accountnumber } = req.params;
+    const accountExists = await Account.getAccount(accountnumber);
+    if (!accountExists) {
+      return res.status(404).json({
         status: 404,
-        error: `Account ${accountNo} not found`,
+        error: 'Account does not exist.',
       });
     }
-    const oldBalance = account[0].balance;
-    if (account[0].status === 'dormant') {
-      res.status(400).json({
-        status: 400,
-        error: `Account ${accountNo} is dormant!`,
-      });
+    const { balance } = accountExists;
+    let transaction;
+    try {
+      transaction = new Transaction(req.body);
+    } catch (error) {
+      return error.message;
     }
 
-
-    const transaction = new TransactionModel(id, type, accountNo,
-      amount, cashier, oldBalance);
-
-    if (transaction.oldBalance >= amount) {
-      transaction.newBalance = transaction.oldBalance - amount;
-      account[0].balance = transaction.newBalance;
-      transactions.push(transaction);
-
-      const response = {
-        transactionId: transactions.length,
-        accountNo,
-        amount: Number(amount),
-        cashier: req.user.id,
-        transactionType: transaction.type,
-        accountBalance: String(transaction.newBalance),
-      };
-      res.status(200).json({
-        status: 200,
-        data: response,
-      });
-    } else {
-      res.status(401).json({
-        status: 401,
+    if (balance < transaction.amount) {
+      return res.status(422).json({
+        status: 422,
         error: 'Insufficient fund',
       });
     }
-  }
 
-  static async creditAccount(req, res) {
-    const id = transactions.length + 1;
-    const type = 'credit';
-    const { accountNo } = req.params;
-    const { amount } = req.body;
-    const account = accounts.filter(acct => acct.accountNumber === Number(accountNo));
-    const cashier = req.user.id;
+    transaction.accountnumber = accountnumber;
+    transaction.cashier = req.user.id;
+    transaction.oldbalance = balance;
+    transaction.newbalance = balance - transaction.amount;
 
-    if (account.length <= 0) {
-      res.status(404).json({
-        status: 404,
-        error: `Account ${accountNo} not found`,
-      });
-    }
-    const oldBalance = account[0].balance;
+    const newTransaction = await transaction.debit();
+    const {
+      id, amount, cashier, type, newbalance,
+    } = newTransaction;
 
-    const transaction = new TransactionModel(id, type, accountNo,
-      amount, cashier, oldBalance);
-    transaction.newBalance = Number(transaction.oldBalance) + Number(amount);
-    account[0].balance = transaction.newBalance;
-    transactions.push(transaction);
-
-    const response = {
-      transactionId: transactions.length,
-      accountNo,
-      amount: Number(amount),
-      cashier: req.user.id,
-      transactionType: transaction.type,
-      accountBalance: String(transaction.newBalance),
-    };
-    res.status(200).json({
-      status: 200,
-      data: response,
+    return res.status(201).json({
+      status: 201,
+      data: {
+        transactionId: id,
+        accountnumber,
+        amount: parseFloat(amount),
+        cashier,
+        transactionType: type,
+        accountBalance: String(newbalance),
+      },
     });
   }
 
-  static checkIfTransExists(accountNo) {
-    return transactions.filter(trans => Number(trans.accountNumber) === Number(accountNo));
+  static async credit(req, res) {
+    const { accountnumber } = req.params;
+    const accountExists = await Account.getAccount(accountnumber);
+    if (!accountExists) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Account does not exist.',
+      });
+    }
+    const { balance } = accountExists;
+    let transaction;
+    try {
+      transaction = new Transaction(req.body);
+    } catch (error) {
+      return error.message;
+    }
+
+    transaction.accountnumber = accountnumber;
+    transaction.cashier = req.user.id;
+    transaction.oldbalance = balance;
+    transaction.newbalance = balance + transaction.amount;
+    const newTransaction = await transaction.credit(balance);
+    const {
+      id, amount, cashier, type, newbalance,
+    } = newTransaction;
+
+    return res.status(201).json({
+      status: 201,
+      data: {
+        transactionId: id,
+        accountnumber,
+        amount,
+        cashier,
+        transactionType: type,
+        accountBalance: newbalance,
+      },
+    });
   }
 
-  static transactionHistory(req, res) {
-    const { accountNo } = req.params;
-    const account = accounts.filter(acct => acct.accountNumber === Number(accountNo));
-    if (account.length <= 0) {
-      res.status(404).json({
-        status: 404,
-        error: `Account ${accountNo} not found`,
-      });
-    }
-    const transactionHist = Transactions.checkIfTransExists(accountNo);
-    if (transactionHist.length <= 0) {
-      res.status(404).json({
-        status: 404,
-        error: `No transaction found on account ${accountNo}`,
-      });
-    } else {
-      res.status(200).json({
-        status: 200,
-        data: transactionHist,
-      });
-    }
-  }
+  static async getTransaction(req, res) {
+    const { id } = req.params;
 
-  static specificTransaction(req, res) {
-    const { accountNo, transactionId } = req.params;
-    const account = accounts.filter(acct => acct.accountNumber === Number(accountNo));
-    if (account.length <= 0) {
-      res.status(404).json({
+    const result = await Transaction.getTransaction(id);
+    if (!result) {
+      return res.status(404).json({
         status: 404,
-        error: `Account ${accountNo} not found`,
+        error: 'Transaction does not exist.',
       });
     }
-    const transaction = transactions.filter(trans => trans.id === Number(transactionId));
-    if (transaction.length <= 0) {
-      res.status(404).json({
-        status: 404,
-        error: `Transaction with id ${transactionId} on account ${accountNo} not found`,
-      });
-    } else {
-      res.status(200).json({
-        status: 200,
-        data: transaction,
-      });
-    }
+    const {
+      createdon, type, accountnumber, amount, oldbalance, newbalance,
+    } = result;
+    return res.status(200).json({
+      status: 200,
+      data: {
+        transactionId: id,
+        createdon,
+        type,
+        accountNumber: Number(accountnumber),
+        amount,
+        oldbalance,
+        newbalance,
+      },
+    });
   }
 }
-export default Transactions;

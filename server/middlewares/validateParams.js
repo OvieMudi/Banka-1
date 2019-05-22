@@ -6,7 +6,7 @@ export default class paramsValidate {
     const acct = req.params;
 
     const acctProperties = {
-      accountNo: 'numeric|digits:10',
+      accountnumber: 'numeric|digits:10',
     };
 
     const validator = new Validator(acct,
@@ -28,7 +28,28 @@ export default class paramsValidate {
     const transId = req.params;
 
     const transIdProperties = {
-      transactionId: 'numeric|min:1|max:10000',
+      id: 'numeric|min:1|max:10000',
+    };
+
+    const validator = new Validator(transId,
+      transIdProperties,
+      customErrorMsgs);
+
+    validator.passes(() => next());
+    validator.fails(() => {
+      const errors = validator.errors.all();
+      return res.status(400).json({
+        status: 400,
+        error: errors,
+      });
+    });
+  }
+
+  static email(req, res, next) {
+    const transId = req.params;
+
+    const transIdProperties = {
+      email: 'required|email|max:50',
     };
 
     const validator = new Validator(transId,

@@ -25,7 +25,7 @@ Banka is a light-weight core banking application that powers banking operations 
 
 ---
 ## Management
-The project development is managed on [Pivotal tracker] https://halimaho.github.io/Banka/UI/
+The project development is managed on [Pivotal tracker] https://www.pivotaltracker.com/n/projects/2321662
 
 
 ---
@@ -66,13 +66,16 @@ PATCH  | Account     | Activate/deactivate an account |`/api/v1/accounts/:accoun
 DELETE | Account     | Delete an account              |`/api/v1/accounts/:accountNo`
 GET    | Account     | Get a specific account         |`/api/v1/accounts/:accountNo`
 GET    | Account     | Get all accounts               |`/api/v1/accounts/`
+GET    | Account     | Get all active accounts        |`/api/v1/accounts?status=active`
+GET    | Account     | Get all dormant accounts       |`/api/v1/accounts?status=dormant`
+GET    | Account     | Get account transaction history|`/api/v1/accounts/:accountNo/transactions`
 POST   | User        | User signup                    |`/api/v1/auth/signup`
 POST   | User        | User signin                    |`/api/v1/auth/signin`
 POST   | User        | Create staff                   |`/api/v1/staff`
+GET    | User        | Get all user accounts          |`/api/v1/user/:email/accounts`
 POST   | Transaction | Debit account                  |`/api/v1/transactions/:accountNo/debit`
 POST   | Transaction | Credit account                 |`/api/v1/transactions/:accountNo/credit`
-GET    | Transaction | Get all transactions           |`/api/v1/transactions/:accountNo`
-GET    | Transaction | Get specific transaction       |`/api/v1/transactions/:accountNo/:transactionId`
+GET    | Transaction | Get specific transaction       |`/api/v1/transactions/:transactionId`
 
 
 ---

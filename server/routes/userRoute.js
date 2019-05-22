@@ -1,15 +1,20 @@
 import { Router } from 'express';
 import userController from '../controllers/userController';
-import { requireAuth, adminAuth } from '../middlewares/authentication';
+import { requireAuth, staffAuth, adminAuth } from '../middlewares/authentication';
 import userValidate from '../middlewares/validateUser';
+import paramsValidate from '../middlewares/validateParams';
 
 
 const userRouter = new Router();
-const { createUser, signin, createStaff } = userController;
+const {
+  signUp, signin, allUserAccounts,
+  createStaff, createAdmin, sendResetMail,
+  passwordReset, resetPassword,
+} = userController;
 
 userRouter.post('/auth/signup',
   userValidate.client,
-  createUser);
+  signUp);
 
 userRouter.post('/auth/signin',
   userValidate.login,
@@ -17,11 +22,20 @@ userRouter.post('/auth/signin',
 
 userRouter.post('/staff',
   requireAuth, adminAuth,
-  userValidate.staff,
+  userValidate.login,
   createStaff);
 
 userRouter.post('/admin',
-  userValidate.staff,
-  createStaff);
+  userValidate.login,
+  createAdmin);
+
+userRouter.get('/user/:email/accounts',
+  requireAuth, staffAuth,
+  paramsValidate.email,
+  allUserAccounts);
+
+userRouter.post('/auth/passwordreset', sendResetMail);
+userRouter.get('/auth/passwordreset/:id/:token', passwordReset);
+userRouter.post('/auth/resetpassword', resetPassword);
 
 export default userRouter;

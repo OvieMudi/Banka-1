@@ -3,7 +3,4 @@ package-lock.json
 build/
 hh.js
 .nyc_output
-test.js
-test2.js
-test3.js
 .env

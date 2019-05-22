@@ -28,8 +28,8 @@ export default class userValidate {
     const client = req.body;
 
     const clientProperties = {
-      firstName: 'required|alpha|min:2|max:50',
-      lastName: 'required|alpha|min:2|max:50',
+      firstname: 'required|alpha|min:2|max:50',
+      lastname: 'required|alpha|min:2|max:50',
       email: 'required|email|max:50',
       password: 'required|alpha_dash|min:6|max:16',
     };
@@ -49,8 +49,8 @@ export default class userValidate {
     const staff = req.body;
 
     const staffProperties = {
-      firstName: 'required|alpha|min:2|max:50',
-      lastName: 'required|alpha|min:2|max:50',
+      firstname: 'required|alpha|min:2|max:50',
+      lastname: 'required|alpha|min:2|max:50',
       email: 'required|email|max:50',
       password: 'required|alpha_dash|min:6|max:16',
       isAdmin: 'required|boolean',

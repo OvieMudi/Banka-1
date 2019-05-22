@@ -11,138 +11,138 @@ const wrongTransactionId = {
 const clientField = {
   email: 'testClient@gmail.com',
   password: 'asdfghjkl',
-  firstName: 'Halle',
-  lastName: 'Berry',
+  firstname: 'Halle',
+  lastname: 'Berry',
 };
 const clientField2 = {
   email: 'testClient2@gmail.com',
   password: 'asdfghjkl',
-  firstName: 'Halle',
-  lastName: 'Berry',
+  firstname: 'Halle',
+  lastname: 'Berry',
 };
 const clientField3 = {
   email: 'testClientbbbb2@gmail.com',
   password: 'asdfghjkl',
-  firstName: 'Halle',
-  lastName: 'Berry',
+  firstname: 'Halle',
+  lastname: 'Berry',
 };
 
 const clientField4 = {
   email: 'testClienbbbbbbft2@gmail.com',
   password: 'asdfghjkl',
-  firstName: 'Halle',
-  lastName: 'Berry',
+  firstname: 'Halle',
+  lastname: 'Berry',
 };
 
 const staffField = {
-  firstName: 'Ade',
-  lastName: 'Bade',
+  firstname: 'Ade',
+  lastname: 'Bade',
   email: 'adebade1@gmail.com',
   password: 'adebade1234',
-  isAdmin: false,
+  isadmin: false,
 };
 
 const staffField2 = {
   email: 'testStaff2@gmail.com',
   password: 'asdfghjkl',
-  firstName: 'Halle',
-  lastName: 'Berry',
-  isAdmin: false,
+  firstname: 'Halle',
+  lastname: 'Berry',
+  isadmin: false,
 };
 
 const staffField3 = {
   email: 'testStaff3@gmail.com',
   password: 'asdfghjkl',
-  firstName: 'Halle',
-  lastName: 'Berry',
-  isAdmin: false,
+  firstname: 'Halle',
+  lastname: 'Berry',
+  isadmin: false,
 };
 const staffField4 = {
   email: 'testStaff4@gmail.com',
   password: 'asdfghjkl',
-  firstName: 'Halle',
-  lastName: 'Berry',
-  isAdmin: false,
+  firstname: 'Halle',
+  lastname: 'Berry',
+  isadmin: false,
 };
 
 const adminField = {
-  firstName: 'Ade',
-  lastName: 'Bade',
+  firstname: 'Ade',
+  lastname: 'Bade',
   email: 'adebade11@gmail.com',
   password: 'adebade1234',
-  isAdmin: true,
+  isadmin: true,
 };
 
 const adminField2 = {
   email: 'testAdmin2@gmail.com',
   password: 'asdfghjkl',
-  firstName: 'Halle',
-  lastName: 'Berry',
-  isAdmin: true,
+  firstname: 'Halle',
+  lastname: 'Berry',
+  isadmin: true,
 };
 
 const adminField3 = {
   email: 'testAdmin3@gmail.com',
   password: 'asdfghjkl',
-  firstName: 'Halle',
-  lastName: 'Berry',
-  isAdmin: true,
+  firstname: 'Halle',
+  lastname: 'Berry',
+  isadmin: true,
 };
 const adminField4 = {
   email: 'testAdmin4@gmail.com',
   password: 'asdfghjkl',
-  firstName: 'Halle',
-  lastName: 'Berry',
-  isAdmin: true,
+  firstname: 'Halle',
+  lastname: 'Berry',
+  isadmin: true,
 };
 const adminField5 = {
   email: 'testAdmin5@gmail.com',
   password: 'asdfghjkl',
-  firstName: 'Halle',
-  lastName: 'Berry',
-  isAdmin: true,
+  firstname: 'Halle',
+  lastname: 'Berry',
+  isadmin: true,
 };
 
 const missingClient = {
-  lastName: 'Bade',
+  lastname: 'Bade',
   email: 'adebade3@gmail.com',
   password: 'adebade1234',
 };
 
 const missingStaff = {
-  firstName: 'Ade',
-  lastName: 'Bade',
+  firstname: 'Ade',
+  lastname: 'Bade',
   password: 'adebade1234',
-  isAdmin: false,
+  isadmin: false,
 };
 
 const missingAdmin = {
-  lastName: 'Bade',
+  firstname: 'Bade',
   email: 'adebade31@gmail.com',
   password: 'adebade1234',
-  isAdmin: true,
+  isadmin: true,
 };
 const emptyClient = {
-  firstName: '',
-  lastName: '',
+  firstname: '',
+  lastname: '',
   email: '',
   password: '',
 };
 
 const emptyStaff = {
-  firstName: '',
-  lastName: '',
+  firstname: '',
+  lastname: '',
   email: '',
   password: '',
-  isAdmin: '',
+  isadmin: '',
 };
 
 const emptyAdmin = {
-  firstName: '',
-  lastName: 'Bade',
+  firstname: '',
+  lastname: 'Bade',
   email: '',
   password: '',
-  isAdmin: '',
+  isadmin: '',
 };
 
 const emptyLogin = {
@@ -191,25 +191,25 @@ const wrongTransactionAmount = {
 
 // testAdmin
 const testAdmin = {
-  firstName: 'Adeq',
-  lastName: 'Badeww',
+  firstname: 'Adeq',
+  lastname: 'Badeww',
   email: 'adebadewww@gmail.com',
   password: 'adebade1234',
 };
 
 const missingtestAdmin = {
-  lastName: 'Bade',
+  lastname: 'Bade',
   email: 'adebade31@gmail.com',
   password: 'adebade1234',
-  isAdmin: true,
+  isadmin: true,
 };
 
 const emptyTestAdmin = {
-  firstName: '',
-  lastName: 'Bade',
+  firstname: '',
+  lastname: 'Bade',
   email: '',
   password: '',
-  isAdmin: '',
+  isadmin: '',
 };
 export {
   wrongAcctNo, wrongTransactionId, wrongAccountType, wrongLogin, wrongTransactionAmount,

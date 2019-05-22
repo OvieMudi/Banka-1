@@ -135,13 +135,6 @@ describe('CASHIER CAN CREDIT ACCOUNT', () => {
 });
 
 describe('TEST GET TRANSACTION HISTORY', () => {
-  //  it('it should successfully get user\'s transaction history', async () => {
-  //    const res = await chai.request(app)
-  //      .get(`/api/v1/transactions/${clientAcct}`)
-  //      .set({ Authorization: `Bearer ${clientToken}` });
-  //    expect(res).to.have.status(200);
-  //    expect(res.body).to.have.property('status');
-  //  });
   it('it should return 403 if account number is wrong', async () => {
     const res = await chai.request(app)
       .get(`/api/v1/transactions/${wrongAcctNo}`)
@@ -160,25 +153,9 @@ describe('TEST GET TRANSACTION HISTORY', () => {
 });
 
 describe('TEST GET SPECIFIC ACCOUNT TRANSACTION', () => {
-  //  it('it should successfully get user\'s specific account transaction', async () => {
-  //    const res = await chai.request(app)
-  //      .get(`/api/v1/transactions/${clientAcct}/1`)
-  //      .set({ Authorization: `Bearer ${clientToken}` });
-  //    expect(res).to.have.status(200);
-  //   expect(res.body).to.have.property('status');
-  // });
-
-  it('it should return 403 if account number is wrong', async () => {
-    const res = await chai.request(app)
-      .get(`/api/v1/transactions/${wrongAcctNo}/1`)
-      .set({ Authorization: `Bearer ${staffToken}` });
-    expect(res).to.have.status(403);
-    expect(res.body).to.have.property('error');
-  });
-
   it('it should return 403 if transaction Id is wrong', async () => {
     const res = await chai.request(app)
-      .get(`/api/v1/transactions/${clientAcct}/${wrongTransactionId}`)
+      .get(`/api/v1/transactions/${wrongTransactionId}`)
       .set({ Authorization: `Bearer ${staffToken}` });
     expect(res).to.have.status(403);
     expect(res.body).to.have.property('error');
@@ -186,7 +163,7 @@ describe('TEST GET SPECIFIC ACCOUNT TRANSACTION', () => {
 
   it('it should return 403 if unauthorized', async () => {
     const res = await chai.request(app)
-      .get(`/api/v1/transactions/${clientAcct}/1`)
+      .get('/api/v1/transactions/1')
       .set({ Authorization: 'Bearer wrong token' });
     expect(res).to.have.status(403);
     expect(res.body).to.have.property('error');

@@ -1,107 +1,155 @@
-import 'babel-polyfill';
-import AccountModel from '../models/accountModel';
-import data from '../mock/mockData';
-import generateAcctNo from '../helpers/generateAcctNo';
+import Account from '../models/accountModel';
 
-const { users, accounts } = data;
+export default class AccountController {
+  static async createAccount(req, res) {
+    const account = new Account(req.body);
 
-class Accounts {
-  static createAccount(req, res) {
-    const id = accounts.length + 1;
-    const accountNumber = generateAcctNo();
-    const { type } = req.body;
-    const userId = req.user.id;
-    const user = users.filter(u => u.id === Number(userId));
-    const account = new AccountModel(id, accountNumber, type);
-    account.owner = user[0].id;
-    user[0].noOfAccounts += 1;
-    accounts.push(account);
-
-    const response = {
-      accountNumber,
-      firstname: user[0].firstName,
-      lastname: user[0].lastName,
-      email: user[0].email,
-      type,
-      openingBalance: 0.00,
-    };
-
-    res.status(201).json({
+    account.owner = req.user.id;
+    account.owneremail = req.user.email;
+    const newAccount = await account.createAccount();
+    const firstName = req.user.firstname;
+    const lastName = req.user.lastname;
+    const {
+      accountnumber, owneremail, type, balance,
+    } = newAccount;
+    return res.status(201).json({
       status: 201,
-      data: response,
+      data: {
+        accountNumber: Number(accountnumber),
+        firstName,
+        lastName,
+        email: owneremail,
+        type,
+        openingBalance: parseFloat(balance.toFixed(1)),
+
+      },
     });
   }
 
-  static activateDeactivate(req, res) {
-    const { accountNo } = req.params;
-    const account = accounts.filter(acct => acct.accountNumber === Number(accountNo));
-    if (account.length <= 0) {
-      res.status(404).json({
+  static async changeStatus(req, res) {
+    const { accountnumber } = req.params;
+    const accountExists = await Account.getAccount(accountnumber);
+    if (!accountExists) {
+      return res.status(404).json({
         status: 404,
-        error: `Account ${accountNo} not found`,
+        error: 'Account does not exist.',
       });
-    } else {
-      if (account[0].status === 'active') {
-        account[0].status = 'dormant';
-      } else {
-        account[0].status = 'active';
-      }
-      const response = {
-        accountNumber: account[0].accountNumber,
-        status: account[0].status,
+    }
+    const { status } = req.body;
+
+    const { status: currentStatus } = accountExists;
+    if (status === currentStatus) {
+      return res.status(200).json({
+        status: 200,
+        error: `Account status is currently ${currentStatus}`,
+      });
+    }
+    accountExists.status = status || accountExists.status;
+
+    await Account.changeStatus(accountExists);
+    return res.status(200).json({
+      status: 200,
+      data: {
+        accountNumber: Number(accountnumber),
+        status,
+      },
+    });
+  }
+
+  static async deleteAccount(req, res) {
+    const { accountnumber } = req.params;
+
+    const accountExists = await Account.getAccount(accountnumber);
+    if (!accountExists) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Account does not exist.',
+      });
+    }
+    await Account.deleteAccount(accountnumber);
+    return res.status(200).json({
+      status: 200,
+      message: 'Account successfuly deleted',
+    });
+  }
+
+  static async accountTransactionHistory(req, res) {
+    const { accountnumber } = req.params;
+
+    const result = await Account.accountTransactionHistory(accountnumber);
+    if (!result.length) {
+      return res.status(404).json({
+        status: 404,
+        error: 'No transaction found for this account.',
+      });
+    }
+    const results = result.map((rest) => {
+      const {
+        id, createdon, type, amount, oldbalance, newbalance,
+      } = rest;
+      return {
+        id, createdon, type, accountnumber, amount, oldbalance, newbalance,
       };
-      res.status(200).json({
-        status: 200,
-        data: response,
-      });
-    }
+    });
+    return res.status(200).json({
+      status: 200,
+      data: {
+        results,
+      },
+    });
   }
 
-  static deleteAccount(req, res) {
-    const { accountNo } = req.params;
-    const acctIndex = accounts.findIndex(acct => acct.accountNumber === Number(accountNo));
-    if (acctIndex < 0) {
-      res.status(404).json({
+  static async getAccount(req, res) {
+    const { accountnumber } = req.params;
+
+    const result = await Account.getAccount(Number(accountnumber));
+    if (!result) {
+      return res.status(404).json({
         status: 404,
-        error: `Delete error! Account ${accountNo} not found`,
-      });
-    } else {
-      accounts.splice(acctIndex, 1);
-      res.status(200).json({
-        status: 200,
-        message: 'Account successfully deleted',
+        error: 'Account does not exist.',
       });
     }
+    const {
+      createdon, owneremail, type, status, balance,
+    } = result;
+    return res.status(200).json({
+      status: 200,
+      data: {
+        createdon,
+        accountNumber: Number(accountnumber),
+        owneremail,
+        type,
+        status,
+        balance,
+      },
+    });
   }
 
-  static specificAccount(req, res) {
-    const { accountNo } = req.params;
-    const account = accounts.filter(acct => acct.accountNumber === Number(accountNo));
-    if (account.length <= 0) {
-      res.status(404).json({
+  static async getAllAccounts(req, res) {
+    let result;
+    const { status } = req.query;
+    if (status === 'dormant') {
+      result = await Account.dormant();
+    } else if (status === 'active') {
+      result = await Account.active();
+    } else result = await Account.getAllAccounts();
+    if (!result.length) {
+      return res.status(404).json({
         status: 404,
-        error: `Account ${accountNo} not found`,
-      });
-    } else {
-      res.status(200).json({
-        status: 200,
-        data: account,
+        error: 'No account found.',
       });
     }
-  }
-
-  static allAccounts(req, res) {
-    if (accounts.length <= 0) {
-      res.status(404).json({
-        status: 404,
-        message: 'No accounts in the database',
-      });
-    } else {
-      res.status(200).json({
-        status: 200,
-        data: accounts,
-      });
-    }
+    const results = result.map((rest) => {
+      const {
+        createdon, accountnumber, owneremail, type, status, balance,
+      } = rest;
+      return {
+        createdon, accountnumber, owneremail, type, status, balance,
+      };
+    });
+    return res.status(200).json({
+      status: 200,
+      data: results,
+    });
   }
 }
-export default Accounts;
