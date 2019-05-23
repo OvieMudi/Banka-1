@@ -8,30 +8,37 @@ const wrongTransactionId = {
 };
 
 // user
+const clientField0 = {
+  firstname: 'Halle',
+  lastname: 'Berry',
+  email: 'testClienttest@gmail.com',
+  password: 'asdfghjkl',
+};
+
 const clientField = {
+  firstname: 'Halle',
+  lastname: 'Berry',
   email: 'testClient@gmail.com',
   password: 'asdfghjkl',
-  firstname: 'Halle',
-  lastname: 'Berry',
 };
 const clientField2 = {
+  firstname: 'Halle',
+  lastname: 'Berry',
   email: 'testClient2@gmail.com',
   password: 'asdfghjkl',
-  firstname: 'Halle',
-  lastname: 'Berry',
 };
 const clientField3 = {
-  email: 'testClientbbbb2@gmail.com',
-  password: 'asdfghjkl',
   firstname: 'Halle',
   lastname: 'Berry',
+  email: 'testClientbbbb2@gmail.com',
+  password: 'asdfghjkl',
 };
 
 const clientField4 = {
-  email: 'testClienbbbbbbft2@gmail.com',
-  password: 'asdfghjkl',
   firstname: 'Halle',
   lastname: 'Berry',
+  email: 'testClienbbbbbbft2@gmail.com',
+  password: 'asdfghjkl',
 };
 
 const staffField = {
@@ -65,6 +72,14 @@ const staffField4 = {
   isadmin: false,
 };
 
+const adminField0 = {
+  firstname: 'Ade',
+  lastname: 'Bade',
+  email: 'adebade11test@gmail.com',
+  password: 'adebade1234',
+  isadmin: true,
+};
+
 const adminField = {
   firstname: 'Ade',
   lastname: 'Bade',
@@ -82,10 +97,10 @@ const adminField2 = {
 };
 
 const adminField3 = {
-  email: 'testAdmin3@gmail.com',
-  password: 'asdfghjkl',
   firstname: 'Halle',
   lastname: 'Berry',
+  email: 'testAdmin3@gmail.com',
+  password: 'asdfghjkl',
   isadmin: true,
 };
 const adminField4 = {
@@ -118,7 +133,6 @@ const missingStaff = {
 
 const missingAdmin = {
   firstname: 'Bade',
-  email: 'adebade31@gmail.com',
   password: 'adebade1234',
   isadmin: true,
 };
@@ -218,4 +232,5 @@ export {
   emptyClient, emptyLogin, emptyStaff, emptyTestAdmin, emptytransaction,
   login, accountType, transaction, testAdmin, clientField2, adminField2, staffField2,
   clientField3, clientField4, staffField3, staffField4, adminField3, adminField4, adminField5,
+  clientField0, adminField0,
 };

@@ -4,3 +4,5 @@ build/
 hh.js
 .nyc_output
 .env
+.idea/
+coverage/

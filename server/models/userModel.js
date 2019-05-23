@@ -78,9 +78,31 @@ export default class User {
     }
   }
 
+  static async getUserById(id) {
+    const queryString = 'SELECT * FROM users WHERE id = $1';
+    const values = [id];
+    try {
+      const { rows } = await pool.query(queryString, values);
+      return rows[0];
+    } catch (error) {
+      return error.message;
+    }
+  }
+
   static async allUserAccounts(email) {
     const queryString = 'SELECT * FROM accounts WHERE owneremail = $1';
     const values = [email];
+    try {
+      const { rows } = await pool.query(queryString, values);
+      return rows;
+    } catch (error) {
+      return error.message;
+    }
+  }
+
+  static async updatePassword(password, id) {
+    const queryString = 'UPDATE users SET password = $1 WHERE id = $2';
+    const values = [Auth.hashPassword(password), id];
     try {
       const { rows } = await pool.query(queryString, values);
       return rows;

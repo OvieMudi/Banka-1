@@ -25,7 +25,7 @@ export default class Transaction {
     return rows[0];
   }
 
-  async credit(balance) {
+  async credit() {
     const queryString = `INSERT INTO transactions (accountnumber, createdon,
       cashier, type, amount, oldbalance, newbalance)
       VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
@@ -33,6 +33,20 @@ export default class Transaction {
       this.accountnumber, this.createdon, this.cashier,
       'credit', this.amount, this.oldbalance, this.newbalance,
     ];
+    const { rows } = await pool.query(queryString, values);
+    pool.query(`UPDATE accounts SET balance = ${this.newbalance} WHERE accountnumber = ${this.accountnumber}`);
+    return rows[0];
+  }
+
+  async updateTransaction(type, id) {
+    const queryString = `UPDATE transactions SET createdon = $1,
+    cashier = $2, type = $3, amount = $4, oldbalance = $5, newbalance = $6 where id = ${id} RETURNING *`;
+
+    const values = [
+      this.createdon, this.cashier,
+      type, this.amount, this.oldbalance, this.newbalance,
+    ];
+
     const { rows } = await pool.query(queryString, values);
     pool.query(`UPDATE accounts SET balance = ${this.newbalance} WHERE accountnumber = ${this.accountnumber}`);
     return rows[0];

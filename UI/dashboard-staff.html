@@ -116,9 +116,12 @@
                     </div>
                 </div>
                     <div id="debit-account" class="items dashboard-area-background shadow">
+                            <div class="otherErrorContainer"></div>
+
                             <div class="small-acct"><div class="acct-display select-label"><label>Debit Account:</label><br></div> 
                             <div class="acct-display">
                                 <input class="dashboard-input acct-number-width" type="text" placeholder="Account number">
+                                <p class="pErrorContainer" id="acctNumberError"></p>
                             </div>
                             <div class="acct-display"> <button class="btn btn-filter cursor">Submit</button></div>
                         </div>
@@ -132,10 +135,14 @@
                             <input class="amountInput" type="number", placeholder="Amount...">
                             <button class="btn-small cursor">DEBIT</button>
                     </div></div>
+
                     <div id="credit-account" class="items dashboard-area-background shadow">
+                            <div class="otherErrorContainer"></div>
+
                             <div class="small-acct"><div class="acct-display select-label"><label>Credit Account:</label><br></div> 
                             <div class="acct-display">
                                 <input class="dashboard-input acct-number-width" type="text" placeholder="Account number">
+                                <p class="pErrorContainer" id="acctNumberError"></p>
                             </div>
                             <div class="acct-display"> <button class="btn btn-filter cursor">Submit</button></div>
                         </div>
@@ -149,10 +156,14 @@
                             <input class="amountInput" type="number", placeholder="Amount...">
                             <button class="btn-small cursor">CREDIT</button>
                     </div></div>
+
                     <div id= "view-an-account" class="items dashboard-area-background shadow">
+                            <div class="otherErrorContainer"></div>
+
                             <div class="small-acct"><div class="acct-display select-label"><label>Account to view:</label><br></div> 
                             <div class="acct-display">
                                 <input class="dashboard-input acct-number-width" type="text" placeholder="Account number">
+                                <p class="pErrorContainer" id="acctNumberError"></p>
                             </div>
                             <div class="acct-display"> <button class="btn btn-filter cursor">Submit</button></div>
                         </div>
@@ -165,10 +176,14 @@
                                 <p><span class="b1">Status:</span> Dormant</p>
                                 <p><span class="b1">Account balance:</span> #2,000.00</p>
                     </div></div>
+
                     <div id="view-all-accounts" class="items dashboard-area-background shadow">
+                            <div class="otherErrorContainer"></div>
+
                             <div class="small-acct"><div class="acct-display select-label"><label>Filter by email:</label><br></div> 
                             <div class="acct-display">
                                 <input class="dashboard-input" type="text" placeholder="Email address here...">
+                                <p class="pErrorContainer" id="emailError"></p>
                             </div>
                             <div class="acct-display select-label"><label>Filter by status:</label><br></div>
                             <div class="acct-display">
@@ -234,10 +249,14 @@
                                 </tr>
                         </table></div>
                     </div></div>
+
                     <div id="change-account-status" class=" items dashboard-area-background shadow">
+                            <div class="otherErrorContainer"></div>
+
                             <div class="small-acct"><div class="acct-display select-label"><label>Change Status:</label><br></div> 
                             <div class="acct-display">
                                 <input class="dashboard-input acct-number-width" type="text" placeholder="Account number">
+                                <p class="pErrorContainer" id="acctNumberError"></p>
                             </div>
                             <div class="acct-display"> <button class="btn btn-filter cursor">Submit</button></div>
                         </div>
@@ -251,10 +270,14 @@
                             <p><span class="b1">Account balance:</span> #2,000.00</p>
                             <button id= "btn-act" class="btn-small cursor" onclick="toggleActiveDeactive()">ACTIVATE</button>
                     </div></div>
+
                     <div id= "delete-account", class=" items dashboard-area-background shadow">
+                            <div class="otherErrorContainer"></div>
+
                             <div class="small-acct"><div class="acct-display select-label"><label>Delete Account:</label><br></div> 
                             <div class="acct-display">
                                 <input class="dashboard-input acct-number-width" type="text" placeholder="Account number">
+                                <p class="pErrorContainer" id="acctNumberError"></p>
                             </div>
                             <div class="acct-display"> <button class="btn btn-filter cursor">Submit</button></div>
                         </div>
@@ -266,8 +289,12 @@
                             <p><span class="b1">Account type:</span> Current</p>
                             <p><span class="b1">Status:</span> Dormant</p>
                             <p><span class="b1">Account balance:</span> #2,000.00</p>
-                            <button class="del-btn btn-small btn cursor">Delete</button>                    </div> </div>    
+                            <button class="del-btn btn-small btn cursor">Delete</button>                    
+                        </div> </div>  
+
                     <div id="create-staff-admin" class="items dashboard-area-background content2 shadow">
+                        <div class="otherErrorContainer"></div>
+
                         <div>
                             <h1 class= "heading-title-login m-title">CREATE A STAFF/ADMIN</h1>
                         </div>
@@ -276,18 +303,22 @@
                                 <div>
                                     <label>FIRSTNAME</label><br>
                                     <input type="text", placeholder="Firstname">
+                                    <p class="pErrorContainer" id="firstNameError"></p>
                                 </div>
                                 <div>
                                     <label>LASTNAME</label><br>
                                     <input type="text", placeholder="Lastname">
+                                    <p class="pErrorContainer" id="lastNameError"></p>
                                 </div>
                                 <div>
                                     <label>EMAIL ADDRESS</label><br>
                                     <input type="email", placeholder="Email Address">
+                                    <p class="pErrorContainer" id="emailError"></p>
                                 </div>
                                 <div>
                                     <label> <p id="password-label">PASSWORD </p></label>
                                     <input type="password", placeholder="*******">
+                                    <p class="pErrorContainer" id="passwordError"></p>
                                     <a href=""><p id="forgot-password-ptag">Forgot your password?</p></a>
                                 </div>
                                 <div>
@@ -295,6 +326,7 @@
                                         <input type="checkbox">
                                         <span class="checkmark"></span>
                                         </label>
+                                        <p class="pErrorContainer" id="isAdminError"></p>
                                 </div>
                                 <button class="btn"><a class="btn1" href="dashboard-staff.html">CREATE</a></button> 
                             </form>

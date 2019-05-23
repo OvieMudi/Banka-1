@@ -97,10 +97,14 @@
                     </div>
                 </div>
                 <div id="account-history" class="items dashboard-area-background shadow" >
+                        <div class="otherErrorContainer"></div>
+
                         <div>
+                            <div id="accountNumberError"></div>
                            <div class="small-acct"><div class="acct-display select-label"><label>Account to display:</label><br></div> 
                             <div class="acct-display">
                                 <input class="dashboard-input acct-number-width" type="number" placeholder="Account number here">
+                                <p class="pErrorContainer" id="acctNumberError"></p>
                             </div>
                             <div class="acct-display"> <button class="btn btn-filter cursor">Submit</button></div>
                         </div>
@@ -141,10 +145,15 @@
                                                 </tr>
                                 </table></div>                    
                 </div>
+                
                 <div id="transaction-history" class="items dashboard-area-background shadow">
+                        <div class="otherErrorContainer"></div>
+
+                        <div id="transactionIDError"></div>
                         <div class="small-acct"><div class="acct-display select-label"><label>Transaction to display:</label><br></div> 
                              <div class="acct-display">
                                  <input class="dashboard-input acct-number-width" type="number" placeholder="Transaction id here">
+                                 <p class="pErrorContainer" id="transIDError"></p>
                              </div>
                              <div class="acct-display"> <button class="btn btn-filter cursor">Submit</button></div>
                          </div>

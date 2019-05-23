@@ -45,6 +45,8 @@
 
     <main>
         <section id ="login" class="padding-bot border shadow">
+            <div class="otherErrorContainer"></div>
+
             <div>
                 <h1 class= "heading-title-login m2">OPEN AN ACCOUNT</h1>
             </div>
@@ -53,10 +55,12 @@
                     <div>
                         <label>FIRSTNAME</label><br>
                         <input type="text", placeholder="Firstname" required>
+                        <p class="pErrorContainer" id="firstnameError"></p>
                     </div>
                     <div>
                         <label>LASTNAME</label><br>
                         <input type="text", placeholder="Lastname" required>
+                        <p class="pErrorContainer" id="lastnameError"></p>
                     </div>
                     <div>
                         <label>ACCOUNT TYPE</label><br>
@@ -64,6 +68,7 @@
                             <option Value="Savings">Savings</option>
                             <option Value="Current">Current</option>
                         </select>
+                        <p class="pErrorContainer" id="acctTypeError"></p>
                     </div>
                     <button class="btn"><a href="#">SUBMIT</a></button>
                 </form>

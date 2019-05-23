@@ -5,8 +5,6 @@ Banka is a light-weight core banking application that powers banking operations 
 [![Coverage Status](https://coveralls.io/repos/github/OvieMudi/Banka-1/badge.svg?branch=develop)](https://coveralls.io/github/OvieMudi/Banka-1?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1e760186992d1ebea237/maintainability)](https://codeclimate.com/github/OvieMudi/Banka-1/maintainability)
 
-
-
 ---
 ## Features
 - User (client) can sign up
