@@ -8,9 +8,9 @@ import app from '../index';
 import {
   wrongLogin,
   clientField3,
-  clientField4,
   adminField3,
-  staffField3,
+  adminField0,
+  clientField0,
   missingAdmin,
   missingClient,
   missingLogin,
@@ -19,49 +19,29 @@ import {
   emptyClient,
   emptyLogin,
   emptyStaff,
-  login,
-  staffField4,
   adminField4,
-  adminField5,
 } from './testData';
 
 const { expect } = chai;
 chai.use(chaiHttp);
 
 let adminToken;
+let clientToken;
 
-describe('USER TEST DATA', () => {
-  before(async () => {
-    const response = await chai
-      .request(app)
-      .post('/api/v1/auth/signup')
-      .send(clientField3);
+before(async () => {
+  const response = await chai
+    .request(app)
+    .post('/api/v1/auth/signup')
+    .send(clientField3);
 
-    clientToken = response.body.data.token;
+  clientToken = response.body.data.token;
 
-    const userResponse = await chai
-      .request(app)
-      .post('/api/v1/accounts')
-      .set({ Authorization: `Bearer ${clientToken}` })
-      .send(accountType);
+  const adminresponse = await chai
+    .request(app)
+    .post('/api/v1/admin')
+    .send(adminField3);
 
-    clientAcct = userResponse.body.data.accountNumber;
-
-    const adminresponse = await chai
-      .request(app)
-      .post('/api/v1/admin')
-      .send(adminField3);
-
-    adminToken = adminresponse.body.data.token;
-
-    const staffResponse = await chai
-      .request(app)
-      .post('/api/v1/staff')
-      .set({ Authorization: `Bearer ${adminToken}` })
-      .send(staffField3);
-
-    staffToken = staffResponse.body.data.token;
-  });
+  adminToken = adminresponse.body.data.token;
 });
 
 describe('USER TEST', () => {
@@ -81,9 +61,25 @@ describe('USER TEST', () => {
       expect(res).to.have.status(400);
       expect(res.body).to.have.property('error');
     });
+
+    it('it should sign up a new user', async () => {
+      const res = await chai.request(app)
+        .post('/api/v1/auth/signup')
+        .send(clientField0);
+      expect(res).to.have.status(201);
+      expect(res.body).to.have.property('data');
+    });
   });
 
   describe('USER LOGIN', () => {
+    it('it should sign in a new user', async () => {
+      const res = await chai.request(app)
+        .post('/api/v1/auth/signin')
+        .send(clientField0);
+      expect(res).to.have.status(200);
+      expect(res.body).to.have.property('data');
+    });
+
     it('it should return 400 if the login fields are empty', async () => {
       const res = await chai.request(app)
         .post('/api/v1/auth/signin')
@@ -110,48 +106,57 @@ describe('USER TEST', () => {
   });
 
   describe('ADMIN CAN CREATE STAFF/ADMIN', () => {
+    it('it should create an admin', async () => {
+      const res = await chai.request(app)
+        .post('/api/v1/staff')
+        .set({ Authorization: `Bearer ${adminToken}` })
+        .send(adminField4);
+      expect(res).to.have.status(201);
+      expect(res.body).to.have.property('data');
+    });
+
     it('it should return 403 if unauthorized', async () => {
       const res = await chai.request(app)
         .post('/api/v1/staff')
         .set({ Authorization: 'Bearer wrongtoken' })
-        .send(adminField4);
+        .send(adminField0);
       expect(res).to.have.status(403);
       expect(res).to.have.property('error');
     });
 
-    it('it should return 403 if there is a missing field in the create staff form', async () => {
+    it('it should return 400 if there is a missing field in the create staff form', async () => {
       const res = await chai.request(app)
         .post('/api/v1/staff')
         .set({ Authorization: `Bearer ${adminToken}` })
         .send(missingStaff);
-      expect(res).to.have.status(403);
+      expect(res).to.have.status(400);
       expect(res).to.have.property('error');
     });
 
-    it('it should return 403 if the create admin fields are empty', async () => {
+    it('it should return 400 if the create admin fields are empty', async () => {
       const res = await chai.request(app)
         .post('/api/v1/staff')
         .set({ Authorization: `Bearer ${adminToken}` })
         .send(emptyAdmin);
-      expect(res).to.have.status(403);
+      expect(res).to.have.status(400);
       expect(res).to.have.property('error');
     });
 
-    it('it should return 403 if there is a missing field in the create admin form', async () => {
+    it('it should return 400 if there is a missing field in the create admin form', async () => {
       const res = await chai.request(app)
         .post('/api/v1/staff')
         .set({ Authorization: `Bearer ${adminToken}` })
         .send(missingAdmin);
-      expect(res).to.have.status(403);
+      expect(res).to.have.status(400);
       expect(res).to.have.property('error');
     });
 
-    it('it should return 403 if the create staff fields are empty', async () => {
+    it('it should return 400 if the create staff fields are empty', async () => {
       const res = await chai.request(app)
         .post('/api/v1/staff')
         .set({ Authorization: `Bearer ${adminToken}` })
         .send(emptyStaff);
-      expect(res).to.have.status(403);
+      expect(res).to.have.status(400);
       expect(res).to.have.property('error');
     });
   });

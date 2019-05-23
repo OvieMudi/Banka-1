@@ -1,10 +1,20 @@
 language: node_js
 node_js:
     - 'stable'
+
+addons:
+  postgresql: "9.6"
+
 cache:
-  directories:
-    - 'node_modules'
+directories:
+  - "node_modules"
+
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - npm run dbtest
+
 script:
-    - npm test
-after_success:
-    - nyc report --reporter=text-lcov | coveralls
+    - npm run test
+    
+after_script: 
+  - npm run coverage

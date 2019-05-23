@@ -43,19 +43,24 @@
 
     <main>
         <section id ="login-section" class="padding-bot border shadow">
+            <div id="otherErrorContainer"></div>
+
             <div>
                 <h1 class= "heading-title-login">SIGN IN</h1>
                 <p class="center"> Not registered with us yet? <a href="register.html">Sign up</a></p>
             </div>
+
             <div class="form-div"> 
                 <form onSubmit="return goToDashboard()";>
                     <div>
                         <label>EMAIL ADDRESS</label><br>
-                        <input id="emailInput" type="email" , placeholder="Email Address" required>
+                        <input id="emailInput" type="email" , placeholder="Email Address">
+                        <p class="pErrorContainer" id="emailError"></p>
                     </div>
                     <div>
                         <label> <p id="password-label">PASSWORD </p></label>
-                        <input type="password", placeholder="*******" required>
+                        <input type="password", placeholder="*******">
+                        <p class="pErrorContainer" id="passwordError"></p>
                         <a href=""><p id="forgot-password-ptag">Forgot your password?</p></a>
                     </div>
                     <button type ="submit" id ="loginButton" class="btn">SIGN IN</button> 

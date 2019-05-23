@@ -109,10 +109,16 @@
                         </div>
                     </div>
                 </div>
+
+
                     <div id= "view-an-account" class="items dashboard-area-background shadow">
+                            <div id="otherErrorContainer"></div>
+
                             <div class="small-acct"><div class="acct-display select-label"><label>Account to view:</label><br></div> 
                             <div class="acct-display">
                                 <input class="dashboard-input acct-number-width" type="text" placeholder="Account number here">
+                                <p class="pErrorContainer" id="acctNumberError"></p>
+
                             </div>
                             <div class="acct-display"> <button class="btn btn-filter cursor">Submit</button></div>
                         </div>
@@ -125,10 +131,15 @@
                                 <p><span class="b1">Status:</span> Dormant</p>
                                 <p><span class="b1">Account balance:</span> #2,000.00</p>
                     </div></div>
+
+
                     <div id="view-all-accounts" class="items dashboard-area-background shadow">
+                            <div id="otherErrorContainer"></div>
+
                             <div class="small-acct"><div class="acct-display select-label"><label>Filter by email:</label><br></div> 
                             <div class="acct-display">
                                 <input class="dashboard-input" type="text" placeholder="Email address here...">
+                                <p class="pErrorContainer" id="emailError"></p>
                             </div>
                             <div class="acct-display select-label"><label>Filter by status:</label><br></div>
                             <div class="acct-display">
@@ -194,10 +205,15 @@
                                 </tr>
                         </table></div>
                     </div></div>
+
+
                     <div id="change-account-status" class=" items dashboard-area-background shadow">
+                            <div id="otherErrorContainer"></div>
+
                             <div class="small-acct"><div class="acct-display select-label"><label>Account Number:</label><br></div> 
                             <div class="acct-display">
                                 <input class="dashboard-input acct-number-width" type="text" placeholder="Account number here...">
+                                <p class="pErrorContainer" id="acctNumberError"></p>
                             </div>
                             <div class="acct-display"> <button class="btn btn-filter cursor">Submit</button></div>
                         </div>
@@ -211,10 +227,15 @@
                             <p><span class="b1">Account balance:</span> #2,000.00</p>
                             <button id= "btn-act" class="btn-small cursor" onclick="toggleActiveDeactive()">ACTIVATE</button>
                     </div></div>
+
+
                     <div id= "delete-account", class=" items dashboard-area-background shadow">
+                            <div id="otherErrorContainer"></div>
+
                             <div class="small-acct"><div class="acct-display select-label"><label>Delete Account:</label><br></div> 
                             <div class="acct-display">
                                 <input class="dashboard-input acct-number-width" type="text" placeholder="Account number">
+                                <p class="pErrorContainer" id="acctNumberError"></p>
                             </div>
                             <div class="acct-display"> <button class="btn btn-filter cursor">Submit</button></div>
                         </div>
@@ -226,8 +247,13 @@
                             <p><span class="b1">Account type:</span> Current</p>
                             <p><span class="b1">Status:</span> Dormant</p>
                             <p><span class="b1">Account balance:</span> #2,000.00</p>
-                            <button class="del-btn btn-small btn cursor">Delete</button>                    </div> </div>    
+                            <button class="del-btn btn-small btn cursor">Delete</button>                    
+                        </div> </div>    
+
+
                     <div id="register-a-staff" class="items dashboard-area-background content2 shadow">
+                            <div class="otherErrorContainer"></div>
+
                         <div>
                             <h1 class= "heading-title-login md-title">REGISTER A STAFF/ADMIN</h1>
                         </div>
@@ -236,24 +262,29 @@
                                 <div>
                                     <label>FIRSTNAME</label><br>
                                     <input type="text", placeholder="Firstname" required>
+                                    <p class="pErrorContainer" id="firstNameError"></p>
                                 </div>
                                 <div>
                                     <label>LASTNAME</label><br>
                                     <input type="text", placeholder="Lastname" required>
+                                    <p class="pErrorContainer" id="lastNameError"></p>
                                 </div>
                                 <div>
                                     <label>EMAIL ADDRESS</label><br>
                                     <input type="email", placeholder="Email Address" required>
+                                    <p class="pErrorContainer" id="emailError"></p>
                                 </div>
                                 <div>
                                     <label> <p id="password-label">PASSWORD </p></label>
                                     <input type="password", placeholder="*******" required>
+                                    <p class="pErrorContainer" id="passwordError"></p>
                                 </div>
                                 <div>
                                     <label class="container">Is ADMIN?
                                         <input type="checkbox">
                                         <span class="checkmark"></span>
                                         </label>
+                                        <p class="pErrorContainer" id="isAdminError"></p>
                                 </div>
                                 <button class="btn"><a href="dashboard-staff.html">REGISTER</a></button> 
                             </form>
