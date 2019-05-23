@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">12.28% </span>
+        <span class="strong">12.17% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>14/114</span>
+        <span class='fraction'>14/115</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">3.85% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>1/15</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">12.39% </span>
+        <span class="strong">12.28% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>14/113</span>
+        <span class='fraction'>14/114</span>
       </div>
     </div>
     <p class="quiet">
@@ -378,7 +378,9 @@
 <a name='L330'></a><a href='#L330'>330</a>
 <a name='L331'></a><a href='#L331'>331</a>
 <a name='L332'></a><a href='#L332'>332</a>
-<a name='L333'></a><a href='#L333'>333</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L333'></a><a href='#L333'>333</a>
+<a name='L334'></a><a href='#L334'>334</a>
+<a name='L335'></a><a href='#L335'>335</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -504,19 +506,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -528,21 +522,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -835,49 +839,51 @@ export default class UsersController {
       data: response,
     });
   }
-&nbsp;
 <span class="fstat-no" title="function not covered" >  static async s</span>ignin(req, res) {
-    const { email, password } = <span class="cstat-no" title="statement not covered" >req.body;</span>
-&nbsp;
-    let result;
+    const {email, password} = <span class="cstat-no" title="statement not covered" >req.body;</span>
 <span class="cstat-no" title="statement not covered" >    try {</span>
-<span class="cstat-no" title="statement not covered" >      result </span>= await User.signin(email);
-    } catch (error) {
-<span class="cstat-no" title="statement not covered" >      return e</span>rror.message;
+      let user = <span class="cstat-no" title="statement not covered" >await User.s</span>ignin(email);
+<span class="cstat-no" title="statement not covered" >      if (!user) {</span>
+<span class="cstat-no" title="statement not covered" >        res.</span>status(404).json({
+          status: 404,
+          message: 'No account found for this user'
+        })
+      } else {
+        const hashedPassword = <span class="cstat-no" title="statement not covered" >user.password;</span>
+<span class="cstat-no" title="statement not covered" >        if(!comparePassword(password, hashedPassword)) {</span>
+<span class="cstat-no" title="statement not covered" >          res.</span>status(409).json({
+            status: 409,
+            message: 'Incorrect email/password provided',
+          })
+        } else {
+          const payload = <span class="cstat-no" title="statement not covered" >{</span>
+            email: user.email,
+            isAdmin: user.isAdmin,
+            type: user.type,
+            firstName: user.firstname,
+          };
+&nbsp;
+          const token  = <span class="cstat-no" title="statement not covered" >Jwt.g</span>enerateToken(payload);
+<span class="cstat-no" title="statement not covered" >          req.</span>user = user;
+          const userResponse = <span class="cstat-no" title="statement not covered" >{</span>
+            ...user, password: ''
+          };
+<span class="cstat-no" title="statement not covered" >          res.</span>status(200).json({
+            status: 200,
+            message: 'Log in successfully',
+            data: {
+              token,
+              user: userResponse,
+            }
+          })
+        }
+      }
+    } catch(err){
+<span class="cstat-no" title="statement not covered" >        res.</span>status(400).json({
+          status: 400,
+          error: err,
+        })
     }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    if (!result) {</span>
-<span class="cstat-no" title="statement not covered" >      return r</span>es.status(401).json({
-        status: 401,
-        error: 'Invalid username/password',
-      });
-    }
-&nbsp;
-    const { password: userPassword } = <span class="cstat-no" title="statement not covered" >result;</span>
-<span class="cstat-no" title="statement not covered" >    if (!comparePassword(password, userPassword)) {</span>
-<span class="cstat-no" title="statement not covered" >      return r</span>es.status(401).json({
-        status: 401,
-        error: 'Invalid username/password',
-      });
-    }
-&nbsp;
-    const {
-      id, firstname, lastname,
-      type, isadmin,
-    } = <span class="cstat-no" title="statement not covered" >result;</span>
-&nbsp;
-    const token = <span class="cstat-no" title="statement not covered" >await Jwt.g</span>enerateToken({
-      id, email, type, isadmin, firstname, lastname,
-    });
-&nbsp;
-    const response = <span class="cstat-no" title="statement not covered" >{</span>
-      token, id, firstname, lastname, email,
-    };
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    return r</span>es.status(200).json({
-      status: 200,
-      data: response,
-    });
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  static async a</span>llUserAccounts(req, res) {
@@ -1048,7 +1054,7 @@ export default class UsersController {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu May 23 2019 21:09:06 GMT+0100 (West Africa Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu May 23 2019 22:11:11 GMT+0100 (West Africa Standard Time)
 </div>
 </div>
 <script src="..\..\prettify.js"></script>
