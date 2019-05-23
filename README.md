@@ -1,9 +1,9 @@
 # Banka
 Banka is a light-weight core banking application that powers banking operations like account creation, customer deposit and withdrawals. This app is meant to support a single bank, where users can signup and create bank accounts online, but must visit the branch to withdraw or deposit money.
 
-[![Build Status](https://travis-ci.org/halimahO/Banka.svg?branch=develop)](https://travis-ci.org/halimahO/Banka)
-[![Coverage Status](https://coveralls.io/repos/github/halimahO/Banka/badge.svg?branch=develop)](https://coveralls.io/github/halimahO/Banka?branch=develop)
-[![Maintainability](https://api.codeclimate.com/v1/badges/1d5dac171d529f87e2da/maintainability)](https://codeclimate.com/github/halimahO/Banka/maintainability)
+[![Build Status](https://travis-ci.com/OvieMudi/Banka-1.svg?branch=develop)](https://travis-ci.com/OvieMudi/Banka-1)
+[![Coverage Status](https://coveralls.io/repos/github/OvieMudi/Banka-1/badge.svg?branch=develop)](https://coveralls.io/github/OvieMudi/Banka-1?branch=develop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1e760186992d1ebea237/maintainability)](https://codeclimate.com/github/OvieMudi/Banka-1/maintainability)
 
 ---
 ## Features
@@ -23,17 +23,17 @@ Banka is a light-weight core banking application that powers banking operations 
 
 ---
 ## Management
-The project development is managed on [Pivotal tracker] https://www.pivotaltracker.com/n/projects/2321662
+The project development is managed on [Pivotal tracker] https://www.pivotaltracker.com/n/projects/2350094
 
 
 ---
 ## Frontend
-The UI is hosted on [Github pages] https://halimaho.github.io/Banka/UI/
+The UI is hosted on [Github pages] https://OvieMudi.github.io/Banka-1/UI/
 
 
 ---
 ## Backend
-The api is hosted on [Heroku] https://my-banka-app.herokuapp.com/api/v1/
+The api is hosted on [Heroku] https://deferall-banka-app.herokuapp.com
 
 
 ---
@@ -53,7 +53,7 @@ The api is hosted on [Heroku] https://my-banka-app.herokuapp.com/api/v1/
 
 ---
 ## API Information
-The API is hosted on [Heroku] https://my-banka-app.herokuapp.com/api/v1/
+The API is hosted on [Heroku] https://deferall-banka-app.herokuapp.com
 
 
 METHOD |  RESOURCE   |     DESCRIPTION                | ENDPOINTS
@@ -79,7 +79,7 @@ GET    | Transaction | Get specific transaction       |`/api/v1/transactions/:tr
 ---
 #### Clone
 
-- Clone this repo to your local machine using `https://github.com/halimahO/Banka.git`
+- Clone this repo to your local machine using `https://github.com/OvieMudi/Banka-1.git`
 
 
 #### Setup
@@ -111,11 +111,30 @@ $ npm run test
 
 
 ---
-## Acknowledgements
-
-Andela
 
 ---
-## Author
+## Contributors
 
-Halimah Oladosu
+**Abraham Ogul**
+Github: [@ogol254](github.com/ogol254)
+
+**Kafilat**
+Github: [@hadeneekeh](https://www.github.com/hadeneekeh)
+
+**Samuel Ocran**
+Github: [@ocranbillions](www.github.com/ocranbillions)
+
+**Chukwudi Ngwobia**
+Github: [@chuxmykel](www.github.com/chuxmykel)
+
+**Dominic Isioma Olije**
+Github: [@encodedBicoding](www.github.com/encodedBicoding)
+
+**Pelumi Alesh**
+Github: [@pelumiAlesh](www.github.com/pelumiAlesh)
+
+**Jude**
+Email: jjchinosoviolet@gmail.com
+## Acknowledgements
+
+[Andela](www.andela.com)
