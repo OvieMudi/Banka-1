@@ -117,25 +117,23 @@ $ npm run test
 ---
 ## Contributors
 
+**Abraham Ogul**
+Github: [@ogol254](github.com/ogol254)
+
 **Kafilat**
 Github: [@hadeneekeh](https://www.github.com/hadeneekeh)
-Email: hadeneekeh01@gmail.com
 
 **Samuel Ocran**
 Github: [@ocranbillions](www.github.com/ocranbillions)
-Email: sammiestt@gmail.com
 
 **Chukwudi Ngwobia**
 Github: [@chuxmykel](www.github.com/chuxmykel)
-Email: ngwobiachukwudi@gmail.com
 
 **Dominic Isioma Olije**
 Github: [@encodedBicoding](www.github.com/encodedBicoding)
-Email: dominicisioma000@gmail.com
 
 **Pelumi Alesh**
 Github: [@pelumiAlesh](www.github.com/pelumiAlesh)
-Email: aleshinloyelukmony@gmail.com
 
 **Jude**
 Email: jjchinosoviolet@gmail.com
