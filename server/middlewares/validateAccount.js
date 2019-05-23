@@ -3,7 +3,9 @@ import customErrorMsgs from '../helpers/customErrorMsgs';
 
 export default class accountValidate {
   static createAccount(req, res, next) {
-    const createAccount = req.body;
+    const { firstname, lastname } = req.user;
+    const { type } = req.body;
+    const createAccount = { firstname, lastname, type };
 
     const createAccountProperties = {
       firstname: 'required|alpha|min:2|max:50',

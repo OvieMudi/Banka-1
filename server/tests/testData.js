@@ -9,29 +9,29 @@ const wrongTransactionId = {
 
 // user
 const clientField = {
+  firstname: 'Halle',
+  lastname: 'Berry',
   email: 'testClient@gmail.com',
   password: 'asdfghjkl',
-  firstname: 'Halle',
-  lastname: 'Berry',
 };
 const clientField2 = {
+  firstname: 'Halle',
+  lastname: 'Berry',
   email: 'testClient2@gmail.com',
   password: 'asdfghjkl',
-  firstname: 'Halle',
-  lastname: 'Berry',
 };
 const clientField3 = {
-  email: 'testClientbbbb2@gmail.com',
-  password: 'asdfghjkl',
   firstname: 'Halle',
   lastname: 'Berry',
+  email: 'testClientbbbb2@gmail.com',
+  password: 'asdfghjkl',
 };
 
 const clientField4 = {
-  email: 'testClienbbbbbbft2@gmail.com',
-  password: 'asdfghjkl',
   firstname: 'Halle',
   lastname: 'Berry',
+  email: 'testClienbbbbbbft2@gmail.com',
+  password: 'asdfghjkl',
 };
 
 const staffField = {

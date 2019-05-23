@@ -14,6 +14,12 @@ transactionRouter.post('/:accountnumber/debit',
   transactionValidate.amount,
   transactionController.debit);
 
+transactionRouter.patch('/reverse/:accountnumber/:id',
+  requireAuth, staffAuth,
+  paramsValidate.acctNo,
+  paramsValidate.transId,
+  transactionController.retractTrasaction);
+
 transactionRouter.post('/:accountnumber/credit',
   requireAuth, staffAuth,
   paramsValidate.acctNo,
