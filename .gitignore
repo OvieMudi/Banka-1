@@ -6,3 +6,4 @@ hh.js
 .env
 .idea
 /.idea
+coverage/

@@ -41,7 +41,7 @@ export default class TransactionController {
     const emailObj = {
       email: owneremail,
       subject: 'Debit Transaction',
-      body:  `
+      body: `
         <h1> A Transaction has occurred on your account with account number: ${accountnumber} </h1>
         <br />
         <h3>Transaction details</h3>
@@ -54,7 +54,7 @@ export default class TransactionController {
         </p>
       `,
     };
-  await UsersController.notify(emailObj);
+    await UsersController.notify(emailObj);
     return res.status(201).json({
       status: 201,
       data: {
@@ -99,7 +99,7 @@ export default class TransactionController {
     const emailObj = {
       email: owneremail,
       subject: 'Credit Transaction',
-      body:  `
+      body: `
         <h1> A Transaction has occurred on your account with account number: ${accountnumber} </h1>
         <br />
         <h3>Transaction details</h3>
