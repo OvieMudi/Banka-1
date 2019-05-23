@@ -7,7 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "mocha --exit --require @babel/register ./server/tests/**/*.js",
+    "testDev": "npm run dbtest && npm run test",
+    "test": "nyc --require @babel/register mocha --exit --require @babel/register ./server/tests",
     "start": "npm run build && node build/index.js",
     "startDev": "cross-env DEBUG=dev && nodemon --exec babel-node server/index.js",
     "build": "npm run clean && babel server --out-dir build",
@@ -49,5 +50,14 @@
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.18.10",
     "nyc": "^14.0.0"
+  },
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ]
   }
 }
