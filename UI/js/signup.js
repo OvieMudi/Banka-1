@@ -1,6 +1,6 @@
 const userSignup = document.getElementById('signup');
 const signupBtn = document.getElementById('register');
-const api = 'http://localhost:3000/api/v1/auth/signup';
+const api = 'https://deferral-banka-app-1.herokuapp.com/api/v1/auth/signup';
 
 const firstNameError = document.getElementById('firstNameError');
 const lastNameError = document.getElementById('lastNameError');
@@ -32,28 +32,41 @@ userSignup.addEventListener('submit', (event) => {
   })
     .then(res => res.json())
     .then((response) => {
+      if (response.status === 400) {
+        firstNameError.innerHTML = response.error.firstname;
+        firstNameError.style.display = 'block';
+
+        lastNameError.innerHTML = response.error.lastname;
+        lastNameError.style.display = 'block';
+
+        emailError.innerHTML = response.error.email;
+        emailError.style.display = 'block';
+
+        passwordError.innerHTML = response.error.password;
+        passwordError.style.display = 'block';
+
+        signupBtn.value = 'REGISTER';
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 4000);
+      }
       if (response.status === 201) {
         window.location = './dashboard.html';
+        localStorage.setItem('userInfo', JSON.stringify(response.data));
       }
       if (response.status === 409) {
         otherError.innerHTML = response.error;
-      }
-      if (response.status === 400) {
-        if (response.error.firstname) {
-          firstNameError.innerHTML = response.error.firstname;
-        }
-        if (response.error.lastname) {
-          lastNameError.innerHTML = response.error.lastname;
-        }
-        if (response.error.email) {
-          emailError.innerHTML = response.error.email;
-        }
-        if (response.error.password) {
-          passwordError.innerHTML = response.error.password;
-        }
+        signupBtn.value = 'REGISTER';
+        setTimeout(() => {
+          window.location.reload();
+        }, 4000);
       }
     })
     .catch((error) => {
       otherError.innerHTML = 'Failed to connect, please try again!' || error.message;
+      setTimeout(() => {
+        window.location.reload();
+      }, 4000);
     });
 });

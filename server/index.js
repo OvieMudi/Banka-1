@@ -7,12 +7,12 @@ import router from './routes';
 
 dotenv.config();
 const app = express();
+app.use(cors());
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', router);
-app.use(cors());
 
 
 router.use('/*', (req, res) => {

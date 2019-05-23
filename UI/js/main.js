@@ -38,12 +38,22 @@ Array.from(lists).forEach((listItem) => {
   });
 });
 
-// function goToDashboard() {
-//   const email = document.getElementById('emailInput').value;
-//   if (email === 'admin@banka.com') {
-//     window.location = 'dashboard-admin.html';
-//   } else if (email === 'staff@banka.com') {
-//     window.location = 'dashboard-staff.html';
-//   } else { window.location = 'dashboard.html'; }
-//   return false;
-// }
+const profileDetails = JSON.parse(localStorage.getItem('userInfo'));
+
+const clientName = document.getElementById('clientName');
+const clientEmail = document.getElementById('clientEmail');
+const clientFirstName = document.getElementById('firstName');
+const clientLastName = document.getElementById('lastName');
+const clientMail = document.getElementById('clientMail');
+
+
+const getProfileDettails = () => {
+  clientName.innerText = `${profileDetails.firstname}, ${profileDetails.lastname}`;
+  clientEmail.innerText = profileDetails.email;
+  clientFirstName.innerHTML = profileDetails.firstname;
+  clientLastName.innerHTML = profileDetails.lastname;
+  clientMail.innerHTML = profileDetails.email;
+};
+
+
+getProfileDettails();
