@@ -38,12 +38,12 @@ Array.from(lists).forEach((listItem) => {
   });
 });
 
-function goToDashboard() {
-  const email = document.getElementById('emailInput').value;
-  if (email === 'admin@banka.com') {
-    window.location = 'dashboard-admin.html';
-  } else if (email === 'staff@banka.com') {
-    window.location = 'dashboard-staff.html';
-  } else { window.location = 'dashboard.html'; }
-  return false;
-}
+// function goToDashboard() {
+//   const email = document.getElementById('emailInput').value;
+//   if (email === 'admin@banka.com') {
+//     window.location = 'dashboard-admin.html';
+//   } else if (email === 'staff@banka.com') {
+//     window.location = 'dashboard-staff.html';
+//   } else { window.location = 'dashboard.html'; }
+//   return false;
+// }
