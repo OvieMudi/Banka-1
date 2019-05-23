@@ -9,7 +9,7 @@ import {
   wrongAcctNo,
   wrongTransactionId,
   wrongTransactionAmount,
-  clientField2,
+  clientField,
   staffField2, accountType,
   transaction,
   emptytransaction,
@@ -28,7 +28,7 @@ before(async () => {
   const respons = await chai
     .request(app)
     .post('/api/v1/auth/signup')
-    .send(clientField2);
+    .send(clientField);
 
   clientToken = respons.body.data.token;
 
@@ -142,20 +142,22 @@ describe('CASHIER CAN CREDIT ACCOUNT', () => {
   });
 });
 
-describe('TEST GET TRANSACTION HISTORY', () => {
-  it('it should return an error if account number is wrong', async () => {
+describe('CASHIER CAN DEBIT ACCOUNT', () => {
+  it('it debit an account with all the correct details', async () => {
     const res = await chai.request(app)
-      .get(`/api/v1/transactions/${wrongAcctNo}`)
-      .set({ Authorization: `Bearer ${staffToken}` });
-    expect(res).to.have.status(400);
-    expect(res.body).to.have.property('error');
+      .post(`/api/v1/transactions/${clientAcct}/debit`)
+      .set({ Authorization: `Bearer ${staffToken}` })
+      .send({ amount: 3000 });
+    expect(res).to.have.status(201);
+    expect(res.body).to.have.property('data');
   });
 
-  it('it should return an error if unauthorized', async () => {
+  it('it should return an error if there\'s insuffiecient funds', async () => {
     const res = await chai.request(app)
-      .get(`/api/v1/transactions/${clientAcct}`)
-      .set({ Authorization: 'Bearer wrong token' });
-    expect(res).to.have.status(403);
+      .post(`/api/v1/transactions/${clientAcct}/debit`)
+      .set({ Authorization: `Bearer ${staffToken}` })
+      .send(transaction);
+    expect(res).to.have.status(422);
     expect(res.body).to.have.property('error');
   });
 });
@@ -197,7 +199,17 @@ describe('CONDUCT REVERSAL ON AN ACCOUNT', () => {
 
   it('it should perform a reversal on an account', async () => {
     const res = await chai.request(app)
-      .patch(`/api/v1/transactions/reverse/${clientAcct}/1`)
+      .patch(`/api/v1/transactions/reverse/${clientAcct}/2`)
+      .set({ Authorization: `Bearer ${staffToken}` });
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('data');
+  });
+});
+
+describe('GET TRANSACTIONS', () => {
+  it('Should get all transactions for an account', async () => {
+    const res = await chai.request(app)
+      .get(`/api/v1/accounts/${clientAcct}/transactions`)
       .set({ Authorization: `Bearer ${staffToken}` });
     expect(res).to.have.status(200);
     expect(res.body).to.have.property('data');
