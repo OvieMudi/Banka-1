@@ -4,8 +4,6 @@ Banka is a light-weight core banking application that powers banking operations 
 [![Build Status](https://travis-ci.org/halimahO/Banka.svg?branch=develop)](https://travis-ci.org/halimahO/Banka)
 [![Coverage Status](https://coveralls.io/repos/github/halimahO/Banka/badge.svg?branch=develop)](https://coveralls.io/github/halimahO/Banka?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1d5dac171d529f87e2da/maintainability)](https://codeclimate.com/github/halimahO/Banka/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/1d5dac171d529f87e2da/test_coverage)](https://codeclimate.com/github/halimahO/Banka/test_coverage)
-
 
 ---
 ## Features
