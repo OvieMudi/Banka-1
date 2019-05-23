@@ -123,49 +123,51 @@ export default class UsersController {
       data: response,
     });
   }
-
   static async signin(req, res) {
-    const { email, password } = req.body;
-
-    let result;
+    const {email, password} = req.body;
     try {
-      result = await User.signin(email);
-    } catch (error) {
-      return error.message;
+      let user = await User.signin(email);
+      if (!user) {
+        res.status(404).json({
+          status: 404,
+          message: 'No account found for this user'
+        })
+      } else {
+        const hashedPassword = user.password;
+        if(!comparePassword(password, hashedPassword)) {
+          res.status(409).json({
+            status: 409,
+            message: 'Incorrect email/password provided',
+          })
+        } else {
+          const payload = {
+            email: user.email,
+            isAdmin: user.isAdmin,
+            type: user.type,
+            firstName: user.firstname,
+          };
+
+          const token  = Jwt.generateToken(payload);
+          req.user = user;
+          const userResponse = {
+            ...user, password: ''
+          };
+          res.status(200).json({
+            status: 200,
+            message: 'Log in successfully',
+            data: {
+              token,
+              user: userResponse,
+            }
+          })
+        }
+      }
+    } catch(err){
+        res.status(400).json({
+          status: 400,
+          error: err,
+        })
     }
-
-    if (!result) {
-      return res.status(401).json({
-        status: 401,
-        error: 'Invalid username/password',
-      });
-    }
-
-    const { password: userPassword } = result;
-    if (!comparePassword(password, userPassword)) {
-      return res.status(401).json({
-        status: 401,
-        error: 'Invalid username/password',
-      });
-    }
-
-    const {
-      id, firstname, lastname,
-      type, isadmin,
-    } = result;
-
-    const token = await Jwt.generateToken({
-      id, email, type, isadmin, firstname, lastname,
-    });
-
-    const response = {
-      token, id, firstname, lastname, email,
-    };
-
-    return res.status(200).json({
-      status: 200,
-      data: response,
-    });
   }
 
   static async allUserAccounts(req, res) {
