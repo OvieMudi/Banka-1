@@ -23,6 +23,11 @@ h1,h2,h3,ul{
     display: none;
     color: red;
 }
+#errorMsg {
+    font-size: 70%;
+    color: red;
+    text-align: center;
+}
 
 a{
     text-decoration: none;

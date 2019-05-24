@@ -52,8 +52,10 @@ userSignup.addEventListener('submit', (event) => {
         }, 4000);
       }
       if (response.status === 201) {
+        window.sessionStorage.banka_token = JSON.stringify(response.data.token);
         window.location = './dashboard.html';
         localStorage.setItem('userInfo', JSON.stringify(response.data));
+
       }
       if (response.status === 409) {
         otherError.innerHTML = response.error;
