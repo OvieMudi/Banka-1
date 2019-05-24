@@ -23,10 +23,7 @@ h1,h2,h3,ul{
     display: none;
     color: red;
 }
-.otherErrorContainer{
-    background:red;
-    color: white;
-}
+
 a{
     text-decoration: none;
     color: #F1F1F2;
@@ -656,6 +653,10 @@ footer{
 }
 .amountInput{
     width: 50%;
+}
+.otherErrorContainer{
+    background:red;
+    color: white;
 }
 /* MEDIA QUERIES */
 
