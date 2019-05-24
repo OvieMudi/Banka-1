@@ -144,20 +144,20 @@ export default class UsersController {
             email: user.email,
             isAdmin: user.isAdmin,
             type: user.type,
-            firstName: user.firstname,
+            firstname: user.firstname,
           };
 
-          const token  = Jwt.generateToken(payload);
+          const token  = await Jwt.generateToken(payload);
           req.user = user;
           const userResponse = {
-            ...user, password: ''
+            ...user, password: null
           };
           res.status(200).json({
             status: 200,
             message: 'Log in successfully',
             data: {
               token,
-              user: userResponse,
+              user: userResponse
             }
           })
         }
