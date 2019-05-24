@@ -157,7 +157,7 @@ export default class UsersController {
             message: 'Log in successfully',
             data: {
               token,
-              user: userResponse,
+              user: userResponse
             }
           })
         }
