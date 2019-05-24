@@ -7,7 +7,8 @@
     <title>Banka | Sign in</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
-    <script src="./js/main.js"></script>
+    <script async src="./js/main.js"></script>
+    <script async src="js/app.js"></script>
 </head>
 <body>
     <header class="shadow">    
@@ -51,15 +52,16 @@
             </div>
 
             <div class="form-div"> 
-                <form onSubmit="return goToDashboard()";>
+                <form action="" method="POST" id="signinForm">
+                    <p id="errorMsg"></p>
                     <div>
                         <label>EMAIL ADDRESS</label><br>
-                        <input id="emailInput" type="email" , placeholder="Email Address">
+                        <input type="email" placeholder="Email Address" name="email">
                         <p class="pErrorContainer" id="emailError"></p>
                     </div>
                     <div>
                         <label> <p id="password-label">PASSWORD </p></label>
-                        <input type="password", placeholder="*******">
+                        <input type="password" placeholder="*******" name="password">
                         <p class="pErrorContainer" id="passwordError"></p>
                         <a href=""><p id="forgot-password-ptag">Forgot your password?</p></a>
                     </div>
@@ -83,7 +85,6 @@
             </div>
         </div>
         <p>Banka, copyright &copy; 2019</p>
-        
     </footer>
 </body>
 </html>
